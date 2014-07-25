@@ -56,7 +56,35 @@ Begin Window frmMain
       Underline       =   False
       Value           =   False
       Visible         =   True
-      Width           =   381
+      Width           =   224
+   End
+   Begin Canvas canvasImage
+      AcceptFocus     =   False
+      AcceptTabs      =   False
+      AutoDeactivate  =   True
+      Backdrop        =   0
+      DoubleBuffer    =   False
+      Enabled         =   True
+      EraseBackground =   True
+      Height          =   201
+      HelpTag         =   ""
+      Index           =   -2147483648
+      InitialParent   =   ""
+      Left            =   366
+      LockBottom      =   False
+      LockedInPosition=   False
+      LockLeft        =   True
+      LockRight       =   False
+      LockTop         =   True
+      Scope           =   0
+      TabIndex        =   1
+      TabPanelIndex   =   0
+      TabStop         =   True
+      Top             =   14
+      Transparent     =   True
+      UseFocusRing    =   True
+      Visible         =   True
+      Width           =   214
    End
 End
 #tag EndWindow
@@ -73,6 +101,35 @@ End
 	#tag Event
 		Sub Open()
 		  me.Value = app.Preferences.getBooleanValue("check",true)
+		End Sub
+	#tag EndEvent
+#tag EndEvents
+#tag Events canvasImage
+	#tag Event
+		Sub Open()
+		  me.AcceptPictureDrop
+		  
+		  if app.Preferences.hasKey("droppedpic") then
+		    me.Backdrop = app.Preferences.getPictureValue("droppedpic")
+		  end if
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub DropObject(obj As DragItem, action As Integer)
+		  if obj.PictureAvailable then
+		    me.Backdrop = obj.Picture
+		    app.Preferences.setPictureValue("droppedpic",me.Backdrop)
+		    
+		  end if
+		End Sub
+	#tag EndEvent
+	#tag Event
+		Sub Paint(g As Graphics, areas() As REALbasic.Rect)
+		  g.ForeColor = &c0000ff
+		  
+		  g.DrawRect(0,0,g.Width ,g.Height )
+		  
+		  g.DrawString("Drop a picture here",5,g.Height -12,g.Width,True)
 		End Sub
 	#tag EndEvent
 #tag EndEvents
