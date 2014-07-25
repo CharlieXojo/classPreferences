@@ -87,7 +87,7 @@ not found and the method will return correctly.
 ##
 ####deleteValue(key as string)
 Deletes a key and value pair from your preferences file. Keys are case
-insensitive but must be unique. If the key does not exists in the
+insensitive and must exist. If the key does not exists in the
 preferences file a KeyNotFoundException will be raised. To avoid this
 the HasKey method can be used prior to calling the get methods to check
 the existence of a key.
