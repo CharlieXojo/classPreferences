@@ -87,6 +87,18 @@ Protected Class classPreferences
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function getPictureValue(key as String, Optional default as picture) As Picture
+		  dim tmpDef as Variant
+		  
+		  if default <> Nil then
+		    tmpDef = EncodeBase64(default.GetData(Picture.FormatPNG))
+		  end  if
+		  
+		  return Picture.FromData(DecodeBase64(getValue(key,tmpDef)))
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function getSingleValue(key as string, Optional default as Single) As Single
 		  Return CDbl(GetValue(key,default))
 		End Function
@@ -171,6 +183,12 @@ Protected Class classPreferences
 		Sub setIntegerValue(key as String, value as Integer)
 		  SetValue(key,str(value))
 		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub setPictureValue(key as string,value as Picture)
+		  SetValue(key,EncodeBase64(value.GetData(Picture.FormatPNG)))
 		End Sub
 	#tag EndMethod
 
