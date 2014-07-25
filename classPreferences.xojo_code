@@ -62,31 +62,31 @@ Protected Class classPreferences
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getBooleanValue(key as string) As Boolean
+		Function getBooleanValue(key as String, Optional default as Boolean) As Boolean
 		  Return (GetValue(key)="TRUE")
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getDoubleValue(key as string) As Double
+		Function getDoubleValue(key as string, Optional default as Double) As Double
 		  Return CDbl(GetValue(key))
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getIntegerValue(key as string) As Integer
+		Function getIntegerValue(key as string, Optional default as Integer) As Integer
 		  Return CDbl(GetValue(key))
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getStringValue(key as string) As String
+		Function getStringValue(key as string, Optional default as String) As String
 		  Return GetValue(key)
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function getValue(key as String) As String
+		Private Function getValue(key as String,Optional default as Variant) As String
 		  Dim rs as RecordSet
 		  
 		  //Check the database is connected
@@ -98,7 +98,11 @@ Protected Class classPreferences
 		    end if
 		    
 		    if rs.RecordCount = 0 then
-		      Raise new KeyNotFoundException
+		      if default <> nil then
+		        return default
+		      Else
+		        Raise new KeyNotFoundException
+		      end if
 		    else
 		      return rs.Field("value").StringValue
 		    end if
