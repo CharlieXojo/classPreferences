@@ -49,17 +49,17 @@ All values are actually converted to string and stored in the
 preferences database as text and then converted back to their datatype
 when retrieved. This is transparent to you when coding.
 
-###setBooleanValue(key as String, value as Boolean)
+####setBooleanValue(key as String, value as Boolean)
 ###
-###setDoubleValue(key as String, value as Double)
+####setDoubleValue(key as String, value as Double)
 ###
-###setSingleValue(key as String, value as Single)
+####setSingleValue(key as String, value as Single)
 ###
-###setColorValue(key as String, value as Color)
+####setColorValue(key as String, value as Color)
 ###
-###setIntegerValue(key as String, value as Integer)
+####setIntegerValue(key as String, value as Integer)
 ###
-###setStringValue(key as String, value as String)
+####setStringValue(key as String, value as String)
 ###
 ##get Methods
 The get methods all return the value of the specified type from the
@@ -71,28 +71,28 @@ key. Alternatively pass the optional default value to be returned if the
 key cannot be found, however, you will not be notified if the key was
 not found and the method will return correctly.
 
-###getBooleanValue(key as String,Optional default as Boolean) as Boolean
+####getBooleanValue(key as String,Optional default as Boolean) as Boolean
 ###
-###getDoubleValue(key as String,Optional default as Double) as Double
+####getDoubleValue(key as String,Optional default as Double) as Double
 ###
-###getSingleValue(key as String,Optional default as Single) as Single
+####getSingleValue(key as String,Optional default as Single) as Single
 ###
-###getColorValue(key as String,Optional default as Color) as Color
+####getColorValue(key as String,Optional default as Color) as Color
 ###
-###getIntegerValue(key as String,Optional default as Integer) as Integer
+####getIntegerValue(key as String,Optional default as Integer) as Integer
 ###
-###getStringValue(key as String,Optional default as String) as String
+####getStringValue(key as String,Optional default as String) as String
 ###
 ##Utility Methods
 ##
-###deleteValue(key as string)
+####deleteValue(key as string)
 Deletes a key and value pair from your preferences file. Keys are case
 insensitive but must be unique. If the key does not exists in the
 preferences file a KeyNotFoundException will be raised. To avoid this
 the HasKey method can be used prior to calling the get methods to check
 the existence of a key.
 
-###hasKey(key as string) as Boolean
+####hasKey(key as string) as Boolean
 Checks the preferences file for the existence of key. Returns true if
 the key exists, false if not.
 Useful for checking the existence of a key prior to calling any of the
