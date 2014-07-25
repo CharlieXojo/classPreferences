@@ -9,8 +9,9 @@ First Release
 #### 25 July 2014
 Thanks to Axel Schneider for the addition of setColorValue and
 getColorValue methods.
-Also added the Optional Default as VariableType argument to each get
+Added the Optional Default as VariableType argument to each get
 method.
+Added the picture datatype.
 
 #Summary
 classPreferences is a class to simply generate a preferences storage
@@ -61,6 +62,8 @@ when retrieved. This is transparent to you when coding.
 ###
 ####setStringValue(key as String, value as String)
 ###
+####setPictureValue(key as String, value as Picture)
+###
 ##get Methods
 The get methods all return the value of the specified type from the
 preferences database. Keys are case insensitive and must exist in the
@@ -82,6 +85,8 @@ not found and the method will return correctly.
 ####getIntegerValue(key as String,Optional default as Integer) as Integer
 ###
 ####getStringValue(key as String,Optional default as String) as String
+###
+####getPictureValue(key as String,Optional default as Picture) as Picture
 ###
 ##Utility Methods
 ##
