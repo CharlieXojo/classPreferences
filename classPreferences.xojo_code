@@ -63,38 +63,38 @@ Protected Class classPreferences
 
 	#tag Method, Flags = &h0
 		Function getBooleanValue(key as String, Optional default as Boolean) As Boolean
-		  Return (GetValue(key)="TRUE")
+		  Return (GetValue(key,default)="TRUE")
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function getColorValue(key as variant, Optional default as Color) As color
-		  dim v as Variant = (GetValue(key))
+		  dim v as Variant = (GetValue(key,default))
 		  Return v.ColorValue
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function getDoubleValue(key as string, Optional default as Double) As Double
-		  Return CDbl(GetValue(key))
+		  Return CDbl(GetValue(key,default))
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function getIntegerValue(key as string, Optional default as Integer) As Integer
-		  Return CDbl(GetValue(key))
+		  Return CDbl(GetValue(key,default))
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
-		Function getSingleValue(key as striing,Optional default as Single) As Single
-		  Return CDbl(GetValue(key))
+		Function getSingleValue(key as string, Optional default as Single) As Single
+		  Return CDbl(GetValue(key,default))
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
 		Function getStringValue(key as string, Optional default as String) As String
-		  Return GetValue(key)
+		  Return GetValue(key,default)
 		End Function
 	#tag EndMethod
 
