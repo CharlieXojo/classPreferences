@@ -68,6 +68,13 @@ Protected Class classPreferences
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function getColorValue(key as variant, Optional default as Color) As color
+		  dim v as Variant = (GetValue(key))
+		  Return v.ColorValue
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function getDoubleValue(key as string, Optional default as Double) As Double
 		  Return CDbl(GetValue(key))
 		End Function
@@ -80,13 +87,19 @@ Protected Class classPreferences
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Function getSingleValue(key as striing,Optional default as Single) As Single
+		  Return CDbl(GetValue(key))
+		End Function
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Function getStringValue(key as string, Optional default as String) As String
 		  Return GetValue(key)
 		End Function
 	#tag EndMethod
 
 	#tag Method, Flags = &h21
-		Private Function getValue(key as String,Optional default as Variant) As String
+		Private Function getValue(key as String, Optional default as Variant) As String
 		  Dim rs as RecordSet
 		  
 		  //Check the database is connected
@@ -142,6 +155,12 @@ Protected Class classPreferences
 	#tag EndMethod
 
 	#tag Method, Flags = &h0
+		Sub setColorValue(key as String, value as Color)
+		  SetValue(key,value)
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
 		Sub setDoubleValue(key as String, value as Double)
 		  SetValue(key,value)
 		  
@@ -151,6 +170,13 @@ Protected Class classPreferences
 	#tag Method, Flags = &h0
 		Sub setIntegerValue(key as String, value as Integer)
 		  SetValue(key,str(value))
+		  
+		End Sub
+	#tag EndMethod
+
+	#tag Method, Flags = &h0
+		Sub setSingleValue(key as String, value as single)
+		  SetValue(key,value)
 		  
 		End Sub
 	#tag EndMethod
