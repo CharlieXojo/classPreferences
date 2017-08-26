@@ -208,30 +208,37 @@ Protected Class classPreferences
 
 	#tag Method, Flags = &h21
 		Private Sub setValue(key as string, value as variant)
-		  Dim rs as RecordSet
+		  Dim ps As PreparedSQLStatement
+		  Dim rs As RecordSet
 		  
 		  //Check the database is connected
-		  if prefDB.Connect =True then
+		  If prefDB.Connect =True Then
 		    //Get any records where key already exists
 		    rs = prefDB.SQLSelect("SELECT * FROM tblPreferences WHERE key='" + Uppercase(key) + "'")
-		    if prefDB.Error then
+		    If prefDB.Error Then
 		      MsgBox prefDB.ErrorMessage
-		    end if
+		    End If
 		    
 		    //If the key does not already exist
-		    if rs.RecordCount = 0 then
-		      prefDB.SQLExecute("INSERT INTO tblPreferences (key,value) VALUES ('" + Uppercase(key) + "','" + str(value) + "')")
-		      if prefDB.Error then
+		    If rs.RecordCount = 0 Then
+		      ps = prefDB.Prepare("INSERT INTO tblPreferences (key,value) VALUES (?,?)")
+		      ps.Bind(0, Uppercase(key), SQLitePreparedStatement.SQLITE_TEXT)
+		      ps.Bind(1, Str(value), SQLitePreparedStatement.SQLITE_TEXT)
+		      ps.SQLExecute
+		      If prefDB.Error Then
 		        MsgBox prefDB.ErrorMessage
-		      end if
-		    else
+		      End If
+		    Else
 		      //Otherwise if it does exists update the value with the new value
-		      prefDB.SQLExecute("UPDATE tblPreferences SET value='" + str(value) + "' WHERE key='" + Uppercase(key) + "'")
-		    end if
+		      ps = prefDB.Prepare("UPDATE tblPreferences SET value=? WHERE key=?")
+		      ps.Bind(0, Str(value), SQLitePreparedStatement.SQLITE_TEXT)
+		      ps.Bind(1, Uppercase(key), SQLitePreparedStatement.SQLITE_TEXT)
+		      ps.SQLExecute
+		    End If
 		    
 		    RaiseEvent PreferencesChanged
 		    
-		  end if
+		  End If
 		  
 		End Sub
 	#tag EndMethod
